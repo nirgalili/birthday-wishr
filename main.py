@@ -11,24 +11,24 @@ password = "pvcnya2013"
 
 # 2. Check if today matches a birthday in the birthdays.csv
 now = dt.datetime.now()
-year = now.year
+# year = now.year
 month = now.month
 day = now.day
 
 df = pd.read_csv("birthdays.csv")
 print(df)
-df_mail_name = df.drop(columns=["year", "month", "day"])
+df_mail_name_year = df.drop(columns=["month", "day"])
 
-bool_df = df.isin([year, month, day])
+bool_df = df.isin([month, day])
 print(bool_df)
 
-bool_df_time_only = bool_df.drop(columns=["name", "email"])
+bool_df_time_only = bool_df.drop(columns=["name", "email", "year"])
 
-new_df = df_mail_name.join(bool_df_time_only)
+new_df = df_mail_name_year.join(bool_df_time_only)
 
 row_index = 0
 for (index, row) in new_df.iterrows():
-    if row.year == True and row.month == True and row.day == True:
+    if row.month == True and row.day == True:
         row_index = index
 
 
