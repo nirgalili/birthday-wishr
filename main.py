@@ -54,6 +54,11 @@ with open("letter_to_send.txt", "w") as file:
 
 # 4. Send the letter generated in step 3 to that person's email address.
 
-
+with smtplib.SMTP("smtp.gmail.com", 587) as connection:
+    connection.starttls()
+    connection.login(user=my_email, password=password)
+    connection.sendmail(from_addr=my_email,
+                        to_addrs="nirgalili1@gmail.com",
+                        msg=f"Subject:Happy Birthday {birthday_kid_name}\n\n{filedata}")
 
 
